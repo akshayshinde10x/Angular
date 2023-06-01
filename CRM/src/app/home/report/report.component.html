@@ -1,1 +1,12 @@
 <p>report works!</p>
+<a class="btn btn-primary" (click)="reloadPage()">Reload page</a>
+<a class="btn btn-primary" (click)="openPage()">Open page</a>
+<hr>
+
+<div *ngFor="let student of students">
+        <span>{{student.id}}</span> |
+        <span>{{student.name}}</span> | 
+        <a *ngIf="true" [routerLink] = "['/student', student.id, student.name]"
+        [queryParams]="{edit:false, allow:true}"
+        fragment="link">View</a>
+</div>
