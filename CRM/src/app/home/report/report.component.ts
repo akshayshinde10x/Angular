@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
 
@@ -8,18 +9,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./report.component.css']
 })
 export class ReportComponent {
+  signupForm: FormGroup;
 
   constructor(private router: Router, private route: ActivatedRoute){}
 
   students = [
-    {id: 1, name: 'Akshay'},
-    {id: 2, name: 'Ganesh'},
+    {id: 1, name: 'Akshay', email:'akshay@tech.com' },
+    {id: 2, name: 'Ganesh', email:'ganesh@tech.com'},
   ]
 
   ngOnInit(){
-    console.log(this.route.snapshot.params['id']);
-    console.log(this.route.snapshot.params['name']);
-    
+    this.signupForm = new FormGroup({
+      'id': new FormControl(null, Validators.required),
+      'name': new FormControl('Shivam', Validators.required),
+      'email': new FormControl(null, [Validators.required, Validators.email])
+    })
+
+
     this.route.params
     .subscribe((param:Params)=>{
       console.log(param['id']);
@@ -40,6 +46,11 @@ export class ReportComponent {
 
   }
 
+  onSubmit(){
+    console.log(this.signupForm);
+    this.students.push(this.signupForm.value);
+    console.log(this.students);
+  }
 
   reloadPage(){
     //absolute path
