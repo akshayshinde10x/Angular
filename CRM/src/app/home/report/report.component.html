@@ -3,10 +3,30 @@
 <a class="btn btn-primary" (click)="openPage()">Open page</a>
 <hr>
 
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+                <label>Student Id</label>
+                <input type="number" id=id 
+                        class="form-control"
+                        formControlName="id">
+        </div>
+        <div class="form-group">
+                <label>Student Name</label>
+                <input type="text" 
+                        class="form-control"
+                        formControlName="name">
+        </div>
+        <div class="form-group">
+                <label>Student email</label>
+                <input type="email" id=email 
+                        class="form-control"
+                        formControlName="email">
+        </div>
+        <button class="btn btn-success mt-2" type="submit">Submit</button>
+</form>
+<hr>
 <div *ngFor="let student of students">
         <span>{{student.id}}</span> |
-        <span>{{student.name}}</span> | 
-        <a *ngIf="true" [routerLink] = "['/student', student.id, student.name]"
-        [queryParams]="{edit:false, allow:true}"
-        fragment="link">View</a>
+        <span>{{student.name}}</span> |
+        <a *ngIf="true" [routerLink]="['/student']">View</a>
 </div>
